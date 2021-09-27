@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: docker/php
+    volumes: 
+      - ./:/var/www/html
+    ports:
+      - "8686:8080"
+  db:
+    image: postgres:13.4
+    environment:
+      POSTGRES_USER: "db_test"
+      POSTGRES_PASSWORD: "db_test"
+      POSTGRES_DB: "db_test"
+    volumes:
+      - dbdata_test:/var/lib/postgresql/data
+      - ./docker/postgres/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5435:5432"
+  adminer:
+    image: adminer
+    ports:
+      - 8585:8080
+volumes:
+    dbdata_test:
