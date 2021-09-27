@@ -14,7 +14,7 @@ return [
     'dependencies' => [
         'factories' => [
             App\Handler\JWTHandler::class => App\Handler\JWTHandlerFactory::class,
-            App\Middleware\Autorization::class => App\Middleware\AutorizationFactory::class,
+            App\Middleware\Autorization\JWTMiddleware::class => App\Middleware\Autorization\JWTMiddlewareFactory::class,
         ],
     ],
 ];
