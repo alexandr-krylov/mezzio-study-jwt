@@ -81,6 +81,11 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-config-aggregator" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-stdlib" />
+      <path value="$PROJECT_DIR$/vendor/dflydev/fig-cookies" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-session" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-session-ext" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-authentication" />
+      <path value="$PROJECT_DIR$/vendor/mezzio/mezzio-authentication-session" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3">

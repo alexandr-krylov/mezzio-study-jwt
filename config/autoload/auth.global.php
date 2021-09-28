@@ -14,7 +14,8 @@ return [
             'leeway' => 60,
             'allowedAlgorithms' => [
                 'HS256'
-            ]
+            ],
+            'login' => '/login',
         ]
     ],
 ];

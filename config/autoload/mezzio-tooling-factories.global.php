@@ -14,7 +14,8 @@ return [
     'dependencies' => [
         'factories' => [
             App\Handler\JWTHandler::class => App\Handler\JWTHandlerFactory::class,
-            App\Middleware\Autorization\JWTMiddleware::class => App\Middleware\Autorization\JWTMiddlewareFactory::class,
+            App\Middleware\Authorization\JWTMiddleware::class => App\Middleware\Authorization\JWTMiddlewareFactory::class,
+            \Mezzio\Session\SessionMiddleware::class => \Mezzio\Session\SessionMiddlewareFactory::class,
         ],
     ],
 ];

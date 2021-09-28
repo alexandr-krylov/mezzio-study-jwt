@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Middleware\Autorization;
+namespace App\Middleware\Authorization;
 
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\Response\TextResponse;
@@ -11,6 +11,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Firebase\JWT\JWT;
+use Mezzio\Authentication\UserInterface;
+use DateTime;
+use DateInterval;
 
 class JWTMiddleware implements MiddlewareInterface
 {
@@ -24,11 +27,13 @@ class JWTMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
     {
         $session = $request->getAttribute('session');
-        if (! $session->has(UserInterface::class)) {
-            return new RedirectResponse('/login');
-        }
+//        var_dump($request);
+//        die;
+//        if (! $session->has(UserInterface::class)) {
+//            return new RedirectResponse($this->config['login']);
+//        }
 
-        return new TextResponse($this->createJWT);
+        return new TextResponse($this->createJWT());
     }
 
     public function hasValidToken(ServerRequestInterface $request): bool
@@ -53,10 +58,11 @@ class JWTMiddleware implements MiddlewareInterface
         $payload = [
             "iss" => $this->config['claim']['iss'],
             "aud" => $this->config['claim']['aud'],
-            "iat" => (new \DateTime())->getTimestamp(),
-            "nbf" => (new \DateTime())->getTimestamp(),
-            "exp" => (new \DateTime())->add(new \DateInterval($this->config['expiryPeriod']))->getTimestamp()
+            "iat" => (new DateTime())->getTimestamp(),
+            "nbf" => (new DateTime())->getTimestamp(),
+            "exp" => ((new DateTime())->add(new DateInterval($this->config['expiryPeriod'])))->getTimestamp()
         ];
+        $payload += ["uname" => 'Vasia', "grants" => 'superadmin'];
         return JWT::encode($payload, $this->config['key']);
     }
 }
