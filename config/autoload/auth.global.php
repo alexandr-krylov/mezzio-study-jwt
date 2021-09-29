@@ -16,6 +16,10 @@ return [
                 'HS256'
             ],
             'login' => '/login',
+            'payload' => [
+                'username', 'roles'
+            ]
         ]
     ],
+
 ];

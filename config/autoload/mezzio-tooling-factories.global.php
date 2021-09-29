@@ -10,12 +10,20 @@
  
 declare(strict_types=1);
 
+use Mezzio\Authentication\DefaultUserFactory;
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Authentication\AuthenticationMiddleware;
+use Mezzio\Authentication\AuthenticationMiddlewareFactory;
+
 return [
     'dependencies' => [
         'factories' => [
             App\Handler\JWTHandler::class => App\Handler\JWTHandlerFactory::class,
             App\Middleware\Authorization\JWTMiddleware::class => App\Middleware\Authorization\JWTMiddlewareFactory::class,
-            \Mezzio\Session\SessionMiddleware::class => \Mezzio\Session\SessionMiddlewareFactory::class,
+//            App\Middleware\Authorization\LoginMiddleware::class => App\Middleware\Authorization\LoginMiddlewareFactory::class,
+            Mezzio\Session\SessionMiddleware::class => Mezzio\Session\SessionMiddlewareFactory::class,
+            UserInterface::class => DefaultUserFactory::class,
+            AuthenticationMiddleware::class => AuthenticationMiddlewareFactory::class,
         ],
     ],
 ];

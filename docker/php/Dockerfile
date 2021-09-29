@@ -7,15 +7,16 @@ RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /usr/local/bin/composer
 
 RUN apt-get update && apt-get install -y \
-    unzip
+    unzip \
+    libpq-dev
 
-#RUN docker-php-ext-install zip
-
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
-
-RUN echo "xdebug.mode = coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
+RUN docker-php-source extract \
+    && docker-php-ext-configure pdo_pgsql \
+    && docker-php-ext-install pdo_pgsql \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && echo "xdebug.mode = coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && docker-php-source delete
 EXPOSE 8080
 
 CMD ["php-fpm"]

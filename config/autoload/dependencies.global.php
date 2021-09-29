@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use Mezzio\Authentication\AuthenticationInterface;
+use Mezzio\Authentication\Session\PhpSession;
+use Mezzio\Authentication\UserRepositoryInterface;
+use Mezzio\Authentication\UserRepository\PdoDatabase;
+
 return [
     // Provides application-wide services.
     // We recommend using fully-qualified class names whenever possible as
@@ -11,6 +16,8 @@ return [
         // key is the alias name, the value is the service to which it points.
         'aliases' => [
             // Fully\Qualified\ClassOrInterfaceName::class => Fully\Qualified\ClassName::class,
+            AuthenticationInterface::class => PhpSession::class,
+            UserRepositoryInterface::class => PdoDatabase::class,
         ],
         // Use 'invokables' for constructor-less services, or services that do
         // not require arguments to the constructor. Map a service name to the

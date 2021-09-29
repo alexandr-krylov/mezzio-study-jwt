@@ -33,7 +33,7 @@ class JWTMiddleware implements MiddlewareInterface
 //            return new RedirectResponse($this->config['login']);
 //        }
 
-        return new TextResponse($this->createJWT());
+        return new TextResponse($this->createJWT($session));
     }
 
     public function hasValidToken(ServerRequestInterface $request): bool

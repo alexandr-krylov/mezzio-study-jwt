@@ -16,6 +16,7 @@ use Mezzio\Router\Middleware\RouteMiddleware;
 use Psr\Container\ContainerInterface;
 use App\Middleware\Authorization\JWTMiddleware;
 use Mezzio\Session\SessionMiddleware;
+use Mezzio\Authentication\AuthenticationMiddleware;
 
 /**
  * Setup middleware pipeline:
@@ -49,8 +50,9 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // Register the routing middleware in the middleware pipeline.
     // This middleware registers the Mezzio\Router\RouteResult request attribute.
     $app->pipe(SessionMiddleware::class);
+
     $app->pipe(RouteMiddleware::class);
-    $app->pipe(JWTMiddleware::class);
+
 
     // The following handle routing failures for common conditions:
     // - HEAD request but no routes answer that method
@@ -71,6 +73,8 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // - route-based authentication
     // - route-based validation
     // - etc.
+//    $app->pipe(AuthenticationMiddleware::class);
+    $app->pipe(JWTMiddleware::class);
 
     // Register the dispatch middleware in the middleware pipeline
     $app->pipe(DispatchMiddleware::class);

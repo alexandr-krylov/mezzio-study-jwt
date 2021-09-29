@@ -26,8 +26,8 @@ class JWTHandler implements RequestHandlerInterface
     {
         // Do some work...
         // Render and return a response:
-        var_dump($request);
-        die;
+//        var_dump($request);
+//        die;
         return new HtmlResponse($this->renderer->render(
             'app::jwt',
             [] // parameters to pass to template
